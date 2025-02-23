@@ -15,6 +15,10 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
+    private String description;
+
     private GendersMovie gender;
 
     private Integer duration;
@@ -24,10 +28,60 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(Long id, GendersMovie gender, Integer duration, CLASSIFICATION classification) {
+    public Movie(Long id, String name, String description, GendersMovie gender, Integer duration, CLASSIFICATION classification) {
         this.id = id;
+        this.name = name;
+        this.description = description;
         this.gender = gender;
         this.duration = duration;
+        this.classification = classification;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public GendersMovie getGender() {
+        return gender;
+    }
+
+    public void setGender(GendersMovie gender) {
+        this.gender = gender;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public CLASSIFICATION getClassification() {
+        return classification;
+    }
+
+    public void setClassification(CLASSIFICATION classification) {
         this.classification = classification;
     }
 }
