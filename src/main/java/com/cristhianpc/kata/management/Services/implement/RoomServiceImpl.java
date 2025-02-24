@@ -37,6 +37,7 @@ public class RoomServiceImpl implements IRoomService {
         if (exist == null) {
             throw new Exception("Room not found");
         }
+
         exist.setCapacity(room.getCapacity());
         exist.setName(room.getName());
 

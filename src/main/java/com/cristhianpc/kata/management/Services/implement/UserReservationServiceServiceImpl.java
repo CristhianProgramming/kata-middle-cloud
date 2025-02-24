@@ -12,7 +12,10 @@ import com.cristhianpc.kata.management.Utils.IEmailService;
 import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class UserReservationServiceServiceImpl implements IUserReservationService {
@@ -36,6 +39,12 @@ public class UserReservationServiceServiceImpl implements IUserReservationServic
             throw new Exception("reservation is invalid");
         }
         return userReservation.getAllByReservation(pageRequest, reservation);
+    }
+
+    @Override
+    public Page<UserRevervation> getAllByReservator(PageRequest pageRequest, String email) throws Exception {
+        Users user = userRepository.findByEmail(email).orElseThrow();
+        return userReservation.getAllByReservator(pageRequest,user);
     }
 
     @Override
@@ -94,6 +103,10 @@ public class UserReservationServiceServiceImpl implements IUserReservationServic
         if (userRevervation.getId() == null) {
             throw new Exception("reservation is not found");
         }
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (!Objects.equals(userRevervation.getReservator().getEmail(), email)){
+            throw new Exception("You don't have permissions to delete this reservations");
+        }
         userReservation.deleteById(id);
     }
 
@@ -110,6 +123,7 @@ public class UserReservationServiceServiceImpl implements IUserReservationServic
         if (reservation.getSala().getCapacity() < seat) {
             throw new Exception("the seat selected is invalid");
         }
+
         UserRevervation isReserved = userReservation.finAllByAllByReservationAndSeat(reservation.getId(), seat);
         if (isReserved != null) {
             throw new Exception("the seat selected is not available");

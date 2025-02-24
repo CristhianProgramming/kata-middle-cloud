@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 public interface IUserReservationService {
 
     Page<UserRevervation> getAllByReservation(PageRequest pageRequest,Long id) throws Exception;
+    Page<UserRevervation> getAllByReservator(PageRequest pageRequest,String email) throws Exception;
+
     UserRevervation getReservationById(Long id);
 
     UserRevervation createReservation(RequestUserReservation reservation) throws Exception;

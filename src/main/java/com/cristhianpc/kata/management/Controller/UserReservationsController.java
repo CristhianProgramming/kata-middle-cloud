@@ -29,6 +29,16 @@ public class UserReservationsController {
         return ResponseEntity.ok(userResevations);
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Page<UserRevervation>> getAllReservationsByUser(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int limit,
+            @PathVariable String id
+    ) throws Exception {
+        Page<UserRevervation> userResevations = userReservationService.getAllByReservator(PageRequest.of(page, limit), id);
+        return ResponseEntity.ok(userResevations);
+    }
+
     @GetMapping("/find/{id}")
     public ResponseEntity<UserRevervation> getReservationById(
             @PathVariable Long id
