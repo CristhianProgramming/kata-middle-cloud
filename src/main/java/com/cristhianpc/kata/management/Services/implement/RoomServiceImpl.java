@@ -17,7 +17,7 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
-    public Page<?> getAllRooms(PageRequest pageRequest) {
+    public Page<Room> getAllRooms(PageRequest pageRequest) {
         return roomRepository.findAll(pageRequest);
     }
 

@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest;
 
 public interface IRoomService {
 
-    Page<?> getAllRooms(PageRequest pageRequest);
+    Page<Room> getAllRooms(PageRequest pageRequest);
 
     Room getRoomById(Long id);
 

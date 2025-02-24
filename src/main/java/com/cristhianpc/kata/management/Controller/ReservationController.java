@@ -20,31 +20,31 @@ public class ReservationController {
     }
 
     @GetMapping("")
-    ResponseEntity<?> getAllReservations(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int limit) {
-        Page<?> response = reservationsService.getAllReservations(PageRequest.of(page, limit));
+    ResponseEntity<Page<Reservation>> getAllReservations(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int limit) {
+        Page<Reservation> response = reservationsService.getAllReservations(PageRequest.of(page, limit));
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<?> getReservatonById(@PathVariable Long id ) {
+    ResponseEntity<Reservation> getReservatonById(@PathVariable Long id ) {
         Reservation response = reservationsService.getReservationById(id);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/room/{id}")
-    ResponseEntity<?> getAllReservationsByRoom(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int limit, @PathVariable(name = "id") Long room_id) {
-        Page<?> response = reservationsService.getReservationsByRoom(PageRequest.of(page, limit), room_id);
+    ResponseEntity<Page<Reservation>> getAllReservationsByRoom(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int limit, @PathVariable(name = "id") Long room_id) {
+        Page<Reservation> response = reservationsService.getReservationsByRoom(PageRequest.of(page, limit), room_id);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("")
-    ResponseEntity<?> createReservation(@RequestBody RequestReservation requestReservation) throws Exception {
+    ResponseEntity<Reservation> createReservation(@RequestBody RequestReservation requestReservation) throws Exception {
         Reservation response = reservationsService.createReservation(requestReservation);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<?> updateReservation(@RequestBody RequestReservation requestReservation, @PathVariable Long id) throws Exception {
+    ResponseEntity<Reservation> updateReservation(@RequestBody RequestReservation requestReservation, @PathVariable Long id) throws Exception {
         Reservation response = reservationsService.updateReservation(id, requestReservation);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

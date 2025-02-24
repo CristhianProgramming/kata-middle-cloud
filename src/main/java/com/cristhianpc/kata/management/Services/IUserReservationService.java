@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 
 public interface IUserReservationService {
 
-    Page<?> getAllByReservation(PageRequest pageRequest,Long id) throws Exception;
+    Page<UserRevervation> getAllByReservation(PageRequest pageRequest,Long id) throws Exception;
     UserRevervation getReservationById(Long id);
 
     UserRevervation createReservation(RequestUserReservation reservation) throws Exception;

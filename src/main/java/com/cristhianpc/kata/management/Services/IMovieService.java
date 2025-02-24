@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 public interface IMovieService {
-    Page<?> getAllMovies(PageRequest pageRequest);
+    Page<Movie> getAllMovies(PageRequest pageRequest);
 
     Movie getMovieByField(Long id);
 

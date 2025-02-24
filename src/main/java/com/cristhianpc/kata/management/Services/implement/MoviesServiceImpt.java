@@ -19,7 +19,7 @@ public class MoviesServiceImpt implements IMovieService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<?> getAllMovies(PageRequest pageRequest) {
+    public Page<Movie> getAllMovies(PageRequest pageRequest) {
         return movieRepository.findAll(pageRequest);
     }
 

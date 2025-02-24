@@ -20,17 +20,17 @@ public class UserReservationsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getAllReservationsRooms(
+    public ResponseEntity<Page<UserRevervation>> getAllReservationsRooms(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int limit,
             @PathVariable Long id
     ) throws Exception {
-        Page<?> userResevations = userReservationService.getAllByReservation(PageRequest.of(page, limit), id);
+        Page<UserRevervation> userResevations = userReservationService.getAllByReservation(PageRequest.of(page, limit), id);
         return ResponseEntity.ok(userResevations);
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<?> getReservationById(
+    public ResponseEntity<UserRevervation> getReservationById(
             @PathVariable Long id
     ) {
         UserRevervation userResevations = userReservationService.getReservationById(id);
@@ -38,7 +38,7 @@ public class UserReservationsController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> createReservation(
+    public ResponseEntity<UserRevervation> createReservation(
             @RequestBody RequestUserReservation reservation
     ) throws Exception {
         UserRevervation userRevervation = userReservationService.createReservation(reservation);
@@ -46,7 +46,7 @@ public class UserReservationsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateReservation(
+    public ResponseEntity<UserRevervation> updateReservation(
             @RequestBody RequestUserReservation reservation,
             @PathVariable Long id
     ) throws Exception {

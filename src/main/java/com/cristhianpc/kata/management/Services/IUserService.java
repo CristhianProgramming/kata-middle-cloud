@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest;
 
 public interface IUserService {
 
-    Page<?> getAllUsers(PageRequest pageRequest);
+    Page<Users> getAllUsers(PageRequest pageRequest);
 
     Users getUserByEmail(String email);
 

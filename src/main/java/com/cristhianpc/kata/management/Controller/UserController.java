@@ -19,16 +19,16 @@ public class UserController {
     }
 
     @GetMapping("")
-    ResponseEntity<?> getAllUsers(
+    ResponseEntity<Page<Users>> getAllUsers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int limit
     ) {
-        Page<?> response = userService.getAllUsers(PageRequest.of(page, limit));
+        Page<Users> response = userService.getAllUsers(PageRequest.of(page, limit));
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{email}")
-    ResponseEntity<?> getuserByEmail(
+    ResponseEntity<Users> getuserByEmail(
             @PathVariable(name = "id") String email
     ) {
         Users response = userService.getUserByEmail(email);
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<?> updateUser(
+    ResponseEntity<Users> updateUser(
             @RequestBody Users payload,
             @PathVariable Long id
 

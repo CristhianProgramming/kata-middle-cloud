@@ -30,7 +30,7 @@ public class UserReservationServiceServiceImpl implements IUserReservationServic
     }
 
     @Override
-    public Page<?> getAllByReservation(PageRequest pageRequest, Long id) throws Exception {
+    public Page<UserRevervation> getAllByReservation(PageRequest pageRequest, Long id) throws Exception {
         Reservation reservation = reservationsService.getReservationById(id);
         if (reservation == null) {
             throw new Exception("reservation is invalid");

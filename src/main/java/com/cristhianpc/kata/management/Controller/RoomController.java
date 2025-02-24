@@ -19,16 +19,16 @@ public class RoomController {
     }
 
     @GetMapping("")
-    ResponseEntity<?> getAllRooms(
+    ResponseEntity<Page<Room>> getAllRooms(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int limit
     ) {
-        Page<?> response = roomService.getAllRooms(PageRequest.of(page, limit));
+        Page<Room> response = roomService.getAllRooms(PageRequest.of(page, limit));
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<?> getRoomById(
+    ResponseEntity<Room> getRoomById(
             @PathVariable(name = "id") Long id_room
     ) {
         Room response = roomService.getRoomById(id_room);
@@ -36,7 +36,7 @@ public class RoomController {
     }
 
     @PostMapping("")
-    ResponseEntity<?> createMovie(
+    ResponseEntity<Room> createMovie(
             @RequestBody Room payload
     ) {
         Room response = roomService.createRoom(payload);
@@ -44,7 +44,7 @@ public class RoomController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<?> updateMovie(
+    ResponseEntity<Room> updateMovie(
             @PathVariable(name = "id") Long id_room,
             @RequestBody Room payload
     ) throws Exception {

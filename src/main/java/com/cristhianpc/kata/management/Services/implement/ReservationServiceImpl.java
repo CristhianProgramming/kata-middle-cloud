@@ -30,12 +30,12 @@ public class ReservationServiceImpl implements IReservationsService {
 
 
     @Override
-    public Page<?> getAllReservations(PageRequest pageRequest) {
+    public Page<Reservation> getAllReservations(PageRequest pageRequest) {
         return reservationRepository.findAll(pageRequest);
     }
 
     @Override
-    public Page<?> getReservationsByRoom(PageRequest pageRequest, Long id) {
+    public Page<Reservation> getReservationsByRoom(PageRequest pageRequest, Long id) {
         return reservationRepository.findAllBySala(id, pageRequest);
     }
 
@@ -64,7 +64,6 @@ public class ReservationServiceImpl implements IReservationsService {
     @Override
     public Reservation updateReservation(Long id, RequestReservation reservation) throws Exception {
 
-        System.out.println(reservation.toString());
         Movie existMovie = movieService.getMovieByField(reservation.getMovie());
         Room existRoom = roomService.getRoomById(reservation.getRoom());
 

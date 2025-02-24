@@ -19,16 +19,16 @@ public class MovieController {
     }
 
     @GetMapping("")
-    ResponseEntity<?> getAllMovies(
+    ResponseEntity<Page<Movie>> getAllMovies(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int limit
     ) {
-        Page<?> response = movieService.getAllMovies(PageRequest.of(page, limit));
+        Page<Movie> response = movieService.getAllMovies(PageRequest.of(page, limit));
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<?> getMovieById(
+    ResponseEntity<Movie> getMovieById(
             @PathVariable(name = "id") Long id_movie
     ) {
         Movie response = movieService.getMovieByField(id_movie);
@@ -36,7 +36,7 @@ public class MovieController {
     }
 
     @PostMapping("")
-    ResponseEntity<?> createMovie(
+    ResponseEntity<Movie> createMovie(
             @RequestBody Movie payload
     ) {
         Movie response = movieService.createMovie(payload);
@@ -44,7 +44,7 @@ public class MovieController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<?> updateMovie(
+    ResponseEntity<Movie> updateMovie(
             @PathVariable(name = "id") Long id_movie,
             @RequestBody Movie payload
     ) throws Exception {

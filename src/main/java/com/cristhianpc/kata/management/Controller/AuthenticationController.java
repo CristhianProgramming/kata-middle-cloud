@@ -1,6 +1,7 @@
 package com.cristhianpc.kata.management.Controller;
 
 import com.cristhianpc.kata.management.Dto.Auth.AuthRequest;
+import com.cristhianpc.kata.management.Dto.Auth.AuthResponse;
 import com.cristhianpc.kata.management.Utils.IAuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,14 +20,14 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    ResponseEntity<?> singUp(
+    ResponseEntity<AuthResponse> singUp(
             @RequestBody AuthRequest request
     ) {
         return ResponseEntity.ok(authenticationService.register(request));
     }
 
     @PostMapping("/login")
-    ResponseEntity<?> loginMethod(
+    ResponseEntity<AuthResponse> loginMethod(
             @RequestBody AuthRequest request
     ) {
         return ResponseEntity.ok(authenticationService.authenticate(request));
