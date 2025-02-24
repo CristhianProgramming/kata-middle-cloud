@@ -2,18 +2,18 @@ package com.cristhianpc.kata.management.Dto.UserReservation;
 
 public class RequestUserReservation {
 
-    private Long reservator;
+    private String reservator;
     private Long reservation;
     private Integer seat;
 
     public RequestUserReservation() {
     }
 
-    public Long getReservator() {
+    public String getReservator() {
         return reservator;
     }
 
-    public void setReservator(Long reservator) {
+    public void setReservator(String reservator) {
         this.reservator = reservator;
     }
 

@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.io.Serial;
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -33,11 +31,12 @@ public class JwtServiceImpl implements IJwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generatedToken(Users userDetails){
-        return generateToken(new HashMap<>(),userDetails);
+    public String generatedToken(Map<String, Object> claims, Users userDetails){
+        return generateToken(claims,userDetails);
     }
 
     public String generateToken( Map<String, Object> extraClaims , Users userDetails){
+
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getEmail())

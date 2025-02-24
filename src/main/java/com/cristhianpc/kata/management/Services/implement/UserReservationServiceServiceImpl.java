@@ -98,7 +98,7 @@ public class UserReservationServiceServiceImpl implements IUserReservationServic
     }
 
     public Pair<Users, Reservation> validateReservation(RequestUserReservation reservation) throws Exception {
-        Users reservatorUser = userRepository.findById(reservation.getReservator()).orElse(null);
+        Users reservatorUser = userRepository.findByEmail(reservation.getReservator()).orElse(null);
         Reservation reservationRoom = reservationsService.getReservationById(reservation.getReservation());
         if (reservationRoom == null || reservatorUser == null) {
             throw new Exception("invalid room or user");

@@ -12,7 +12,7 @@ public interface IJwtService {
 
     String generateToken(Map<String, Object> extraClaims , Users userDetails);
 
-    String generatedToken(Users userDetails);
+    String generatedToken(Map<String, Object> claims, Users userDetails);
 
     boolean isTokenValid(String token,UserDetails userDetails);
 }

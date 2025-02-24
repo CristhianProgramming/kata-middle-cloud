@@ -3,6 +3,7 @@ package com.cristhianpc.kata.management.Utils.implment;
 import com.cristhianpc.kata.management.Dto.Auth.AuthRequest;
 import com.cristhianpc.kata.management.Dto.Auth.AuthResponse;
 import com.cristhianpc.kata.management.Models.Users;
+import com.cristhianpc.kata.management.Models.enums.UserRols;
 import com.cristhianpc.kata.management.Services.IUserService;
 import com.cristhianpc.kata.management.Utils.IAuthenticationService;
 import com.cristhianpc.kata.management.Utils.IJwtService;
@@ -10,6 +11,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class AuthenticationServiceImpl implements IAuthenticationService {
@@ -31,7 +35,10 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         Users user = new Users();
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
-        String jwtToken = jwtService.generatedToken(user);
+        userService.createUser(user);
+        Map<String, Object> auths = new HashMap<>();
+        auths.put("Rol",new Auths(user.getRol()));
+        var jwtToken = jwtService.generatedToken(auths,user);
         return new AuthResponse(jwtToken);
     }
 
@@ -44,7 +51,11 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
                 )
         );
         var user = userService.getUserByEmail(request.getEmail());
-        var jwtToken = jwtService.generatedToken(user);
+        Map<String, Object> auths = new HashMap<>();
+        auths.put("Rol",new Auths(user.getRol()));
+        var jwtToken = jwtService.generatedToken(auths,user);
         return new AuthResponse(jwtToken);
     }
+
+    record Auths(UserRols[] userRols){}
 }

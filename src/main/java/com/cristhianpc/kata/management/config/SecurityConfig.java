@@ -31,12 +31,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request ->
                         request.requestMatchers("/api/v1/auth/**").permitAll()
-                                .requestMatchers(HttpMethod.GET,"/api/v1/movies").permitAll()
-                                .requestMatchers(HttpMethod.GET,"/api/v1/reservations").permitAll()
-                                .requestMatchers(HttpMethod.GET,"/api/v1/rooms").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/v1/movies/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/v1/reservations/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/v1/user/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/v1/rooms/**").permitAll()
                                 .requestMatchers("/api/v1/admin/**").hasAuthority(UserRols.ADMIN.name())
                                 .anyRequest().authenticated()
                 )
+                .cors(Customizer.withDefaults())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(auhtenticationFilter, UsernamePasswordAuthenticationFilter.class)
