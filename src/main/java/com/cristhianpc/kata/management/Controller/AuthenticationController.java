@@ -1,7 +1,7 @@
 package com.cristhianpc.kata.management.Controller;
 
-import com.cristhianpc.kata.management.Models.Users;
-import com.cristhianpc.kata.management.Services.IUserService;
+import com.cristhianpc.kata.management.Dto.Auth.AuthRequest;
+import com.cristhianpc.kata.management.Utils.IAuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,19 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {
 
-    private final IUserService userService;
+    private final IAuthenticationService authenticationService;
 
-    public AuthenticationController(IUserService userService) {
-        this.userService = userService;
+    public AuthenticationController(IAuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 
-    @PostMapping()
+    @PostMapping("/register")
     ResponseEntity<?> singUp(
-            @RequestBody Users userPayload
+            @RequestBody AuthRequest request
     ) {
-        Users response = userService.createUser(userPayload);
-        response.setId(0L);
-        return ResponseEntity.status(201).body(response);
+        return ResponseEntity.ok(authenticationService.register(request));
     }
 
+    @PostMapping("/login")
+    ResponseEntity<?> loginMethod(
+            @RequestBody AuthRequest request
+    ) {
+        return ResponseEntity.ok(authenticationService.authenticate(request));
+    }
 }

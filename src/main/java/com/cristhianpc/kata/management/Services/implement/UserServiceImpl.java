@@ -7,8 +7,9 @@ import com.cristhianpc.kata.management.Services.IUserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class UserServiceImpl implements IUserService {
 
     private final PasswordEncoder passwordEncoder;
@@ -51,4 +52,5 @@ public class UserServiceImpl implements IUserService {
         Users userExist = userRepository.findById(id).orElseThrow();
         userRepository.deleteById(id);
     }
+
 }

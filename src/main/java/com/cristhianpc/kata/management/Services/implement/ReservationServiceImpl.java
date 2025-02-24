@@ -63,6 +63,8 @@ public class ReservationServiceImpl implements IReservationsService {
 
     @Override
     public Reservation updateReservation(Long id, RequestReservation reservation) throws Exception {
+
+        System.out.println(reservation.toString());
         Movie existMovie = movieService.getMovieByField(reservation.getMovie());
         Room existRoom = roomService.getRoomById(reservation.getRoom());
 

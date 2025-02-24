@@ -45,6 +45,7 @@ public class MoviesServiceImpt implements IMovieService {
         exist.setClassification(movie.getClassification());
         exist.setName(movie.getName());
         exist.setDescription(movie.getDescription());
+        exist.setImageUrl(movie.getImageUrl());
         return movieRepository.save(exist);
     }
 

@@ -25,6 +25,12 @@ public class ReservationController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<?> getReservatonById(@PathVariable Long id ) {
+        Reservation response = reservationsService.getReservationById(id);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/room/{id}")
     ResponseEntity<?> getAllReservationsByRoom(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int limit, @PathVariable(name = "id") Long room_id) {
         Page<?> response = reservationsService.getReservationsByRoom(PageRequest.of(page, limit), room_id);

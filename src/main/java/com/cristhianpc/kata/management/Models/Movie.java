@@ -21,6 +21,8 @@ public class Movie {
 
     private GendersMovie gender;
 
+    private String imageUrl;
+
     private Integer duration;
 
     private CLASSIFICATION classification;
@@ -28,11 +30,12 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(Long id, String name, String description, GendersMovie gender, Integer duration, CLASSIFICATION classification) {
+    public Movie(Long id, String name, String description, GendersMovie gender, String imageUrl, Integer duration, CLASSIFICATION classification) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.gender = gender;
+        this.imageUrl = imageUrl;
         this.duration = duration;
         this.classification = classification;
     }
@@ -67,6 +70,14 @@ public class Movie {
 
     public void setGender(GendersMovie gender) {
         this.gender = gender;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Integer getDuration() {

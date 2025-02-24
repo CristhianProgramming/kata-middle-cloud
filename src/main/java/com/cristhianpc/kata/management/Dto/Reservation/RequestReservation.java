@@ -4,15 +4,15 @@ import java.time.LocalTime;
 
 public class RequestReservation {
     private Long movie;
-    private Long room;
+    private Long sala;
     private LocalTime time;
 
     public RequestReservation() {
     }
 
-    public RequestReservation(Long movie, Long room, LocalTime time) {
+    public RequestReservation(Long movie, Long sala, LocalTime time) {
         this.movie = movie;
-        this.room = room;
+        this.sala = sala;
         this.time = time;
     }
 
@@ -25,11 +25,11 @@ public class RequestReservation {
     }
 
     public Long getRoom() {
-        return room;
+        return sala;
     }
 
     public void setRoom(Long room) {
-        this.room = room;
+        this.sala = room;
     }
 
     public LocalTime getTime() {
