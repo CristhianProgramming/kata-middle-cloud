@@ -1,12 +1,17 @@
 package com.cristhianpc.kata.management.Models;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalTime;
 
 @Table(name = "reservation")
 @Entity
-
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Reservation {
 
     @Id
@@ -21,44 +26,5 @@ public class Reservation {
 
     private LocalTime time;
 
-    public Reservation() {
-    }
 
-    public Reservation(Movie movie, Room sala, LocalTime time) {
-        this.movie = movie;
-        this.sala = sala;
-        this.time = time;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public Room getSala() {
-        return sala;
-    }
-
-    public void setSala(Room sala) {
-        this.sala = sala;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
 }

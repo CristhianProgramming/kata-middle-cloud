@@ -58,11 +58,11 @@ public class UserReservationServiceServiceImpl implements IUserReservationServic
         validateSeat(reservationPair.b, reservation.getSeat());
         try {
             UserRevervation createdResponse = userReservation.save(
-                    new UserRevervation(
-                            reservationPair.a,
-                            reservationPair.b,
-                            reservation.getSeat()
-                    )
+                    UserRevervation.builder()
+                            .reservator(reservationPair.a)
+                            .reservation(reservationPair.b)
+                            .seat(reservation.getSeat())
+                            .build()
             );
             emailService.sendEmailTicket(reservationPair.a.getEmail(),reservation.getSeat());
             return createdResponse;
@@ -83,13 +83,7 @@ public class UserReservationServiceServiceImpl implements IUserReservationServic
             userRevervation.setReservation(reservationPair.b);
             userRevervation.setReservator(reservationPair.a);
             userRevervation.setSeat(reservation.getSeat());
-            UserRevervation createdResponse = userReservation.save(
-                    new UserRevervation(
-                            reservationPair.a,
-                            reservationPair.b,
-                            reservation.getSeat()
-                    )
-            );
+            UserRevervation createdResponse = userReservation.save(userRevervation);
             emailService.sendEmailTicket(reservationPair.a.getEmail(),reservation.getSeat());
             return createdResponse;
         } catch (Exception e) {

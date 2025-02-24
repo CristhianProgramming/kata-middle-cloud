@@ -47,7 +47,7 @@ public class ReservationServiceImpl implements IReservationsService {
     @Override
     public Reservation createReservation(RequestReservation reservation) throws Exception {
         Movie existMovie = movieService.getMovieByField(reservation.getMovie());
-        Room existRoom = roomService.getRoomById(reservation.getRoom());
+        Room existRoom = roomService.getRoomById(reservation.getSala());
 
         if (existRoom == null || existMovie == null) {
             throw new Exception("invalid room or movie");
@@ -57,15 +57,19 @@ public class ReservationServiceImpl implements IReservationsService {
                 reservation.getTime(),
                 reservation.getTime().plusMinutes(existMovie.getDuration()),
                 existRoom.getId());
-
-        return reservationRepository.save(new Reservation(existMovie, existRoom, reservation.getTime()));
+        return reservationRepository.save(
+                Reservation.builder()
+                        .sala(existRoom)
+                        .movie(existMovie)
+                        .time(reservation.getTime())
+                        .build());
     }
 
     @Override
     public Reservation updateReservation(Long id, RequestReservation reservation) throws Exception {
 
         Movie existMovie = movieService.getMovieByField(reservation.getMovie());
-        Room existRoom = roomService.getRoomById(reservation.getRoom());
+        Room existRoom = roomService.getRoomById(reservation.getSala());
 
         if (existRoom == null || existMovie == null) {
             throw new Exception("invalid room or movie");
